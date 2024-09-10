@@ -60,6 +60,15 @@
 
     </div>
 
+    <ModalBasic
+        v-if="modal_status"
+        title="Confirmation"
+        :buttons="modal_buttons_form"
+        @onConfirm="$router.push( { path: '/' } )"
+    >
+        <p class="o-half">The user has been registered successfully, we will direct you to login.</p>
+    </ModalBasic>
+
 </template>
 
 <script>
@@ -68,25 +77,35 @@ import { useAuthentication } from '@/stores/authentication';
 
 import * as Button from "@/components/Button"
 import * as Input from "@/components/Input"
+import * as Modal from "@/components/Modal"
 
 export default{
     components: {
         ...Button,
-        ...Input
+        ...Input,
+        ...Modal
     },
     data(){
         return{
             form: {},
+            modal_status: false,
+            modal_buttons_form: [
+                {
+                    type: 'Confirm', 
+                    class: 'bg-color-brand-three color-brand-one p-md rounded-sm pointer', 
+                    text: 'Okay, Thank you!'
+                },
+            ]
         }
     },
     created(){
     },
     methods: {
-        SetUserAuthentication(){
+        async SetUserAuthentication(){
             if(this.form){
                 try{
-                    useAuthentication().fetchSingup(this.form);
-                    this.$router.push( { path: '/' } );
+                    await useAuthentication().fetchSingup(this.form);
+                    this.modal_status = true;
                 }catch(err){
 
                 }

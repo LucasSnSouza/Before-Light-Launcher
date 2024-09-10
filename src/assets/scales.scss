@@ -43,6 +43,10 @@ $font-xlg: 20pt;
     padding: $scale-lg;
 }
 
+.p-xlg{
+    padding: $scale-xlg;
+}
+
 .rounded{
     border-radius: 999px;
 }
@@ -63,8 +67,16 @@ $font-xlg: 20pt;
     opacity: 1.0;
 }
 
+.o-3-4{
+    opacity: 0.75;
+}
+
 .o-half{
     opacity: 0.5;
+}
+
+.o-1-4{
+    opacity: 0.25;
 }
 
 .gap-sm{

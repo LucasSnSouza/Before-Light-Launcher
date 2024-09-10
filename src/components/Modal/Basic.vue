@@ -1,15 +1,26 @@
 <template>
     <div class="modal-wrapper flex x-center y-center">
         <div class="modal-panel">
-            <div class="modal-top-title">
-    
+            <div class="modal-slot-screen p-xlg font-xsm">
+                <h1
+                    v-if="title != ''"
+                    style="font-size: 11pt; padding-bottom: 15px;"
+                    class="o-3-4"
+                >
+                    {{ title }}
+                </h1>
+                <slot>
+                </slot>
             </div>
-            <div class="modal-slot-screen">
-                DDDD
-                <slot/>
-            </div>
-            <div class="modal-action-button">
-                
+            <div class="modal-action-button p-md w-full flex x-end y-center gap-md">
+                <ButtonBasic
+                    v-for="(item, index) of buttons"
+                    :key="index"
+                    :class="item?.class"
+                    @click="$emit(`on${item?.type}`)"
+                >
+                    {{ item?.text }}
+                </ButtonBasic>
             </div>
         </div>
     </div>
@@ -31,6 +42,14 @@ export default{
         class: {
             type: String,
             default: null
+        },
+        title: {
+            type: String,
+            default: ""
+        },
+        buttons: {
+            type: Array,
+            default: () => []
         }
     }
 }
@@ -43,14 +62,23 @@ export default{
     position: absolute;
     width: 100%;
     height: 100%;
+    background: rgba(0, 0, 0, 0.3);
     top: 0;
     left: 0;
 
     .modal-panel{
-        width: 300px;
-        height: 250px;
+        width: 500px;
+        height: auto;
+        overflow: hidden;
+        border-radius: 4px;
         background: white;
-        box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.100);
+        box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.100);
+
+        .modal-action-button{
+            height: 50px;
+            background: var(--color-brand-two);
+        }
+
     }
 }
 

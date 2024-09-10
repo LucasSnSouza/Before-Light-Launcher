@@ -2,6 +2,7 @@ $color-brand-one: rgb(255, 255, 255);
 $color-brand-two: rgb(248, 242, 240);
 $color-brand-three: rgb(254, 134, 96);
 $color-brand-four: rgb(50, 50, 50);
+$color-brand-five: rgb(209, 197, 190);
 
 :root {
 
@@ -9,6 +10,7 @@ $color-brand-four: rgb(50, 50, 50);
   --color-brand-two: #{$color-brand-two};
   --color-brand-three: #{$color-brand-three};
   --color-brand-four: #{$color-brand-four};
+  --color-brand-five: #{$color-brand-five};
 
 }
 
@@ -24,6 +26,9 @@ $color-brand-four: rgb(50, 50, 50);
 .bg-color-brand-four {
   background-color: var(--color-brand-four);
 }
+.bg-color-brand-five {
+  background-color: var(--color-brand-five);
+}
 
 .color-brand-one{
   color: var(--color-brand-one);
@@ -36,4 +41,7 @@ $color-brand-four: rgb(50, 50, 50);
 }
 .color-brand-four{
   color: var(--color-brand-four);
+}
+.color-brand-five{
+  color: var(--color-brand-five);
 }

@@ -60,10 +60,24 @@
             <div class="backdrop-blur-frame h-half"></div>
 
         </div>
+
         <ModalBasic
-            v-if="modal_information"
+            v-if="modal_sucess_status"
+            title="Confirmation"
+            :buttons="modal_sucess_buttons_form"
+            @onCancel="modal_sucess_status = false"
         >
-            {{ modal_information }}
+            <p class="o-half">The user was found successfully, do you want to continue to the game?</p>
+        </ModalBasic>
+
+        <ModalBasic
+            v-if="modal_failed_status"
+            title="Warning"
+            :buttons="modal_failed_buttons_form"
+            @onCancel="modal_failed_status = false"
+            @onConfirm="$router.push( { path: '/singup' } )"
+        >
+            <p class="o-half">Your registration was not found, would you like to register again?</p>
         </ModalBasic>
 
     </div>
@@ -87,19 +101,45 @@ export default{
     data(){
         return{
             form: {},
-            modal_information: null,
+            modal_sucess_status: false,
+            modal_sucess_buttons_form: [
+                {
+                    type: 'Cancel', 
+                    class: 'bg-color-brand-five color-brand-one p-md rounded-sm pointer', 
+                    text: 'Cancel'
+                },
+                {
+                    type: 'Continue', 
+                    class: 'bg-color-brand-three color-brand-one p-md rounded-sm pointer', 
+                    text: 'Yes, continue!'
+                },
+            ],
+            modal_failed_status: false,
+            modal_failed_buttons_form: [
+                {
+                    type: 'Cancel', 
+                    class: 'bg-color-brand-five color-brand-one p-md rounded-sm pointer', 
+                    text: 'Cancel'
+                },
+                {
+                    type: 'Confirm', 
+                    class: 'bg-color-brand-three color-brand-one p-md rounded-sm pointer', 
+                    text: 'Yes, continue to register!'
+                },
+            ]
         }
     },
     created(){
     },
     methods: {
-        SetUserAuthentication(){
+        async SetUserAuthentication(){
             if(this.form){
-                try{
-                    useAuthentication().fetchSingin(this.form);
-                }catch(e){
-                    console.log('teste');
-                    this.modal_information = e;
+                await useAuthentication().fetchSingin(this.form);
+                let response = useAuthentication().GetSinginData;
+                if(response?.code == 200){
+                    this.modal_sucess_status = true;
+                }else{
+                    this.modal_failed_status = true;
                 }
             }
         }
