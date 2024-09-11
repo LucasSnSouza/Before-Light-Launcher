@@ -25,6 +25,12 @@
                         v-model="form['password']"
                         :value="form['password']"
                     />
+                    <InputText
+                        title="Username"
+                        placeholder="Enter your unique username"
+                        v-model="form['username']"
+                        :value="form['username']"
+                    />
                     <ButtonBasic
                         class="bg-color-brand-three color-brand-one p-md rounded-md pointer"
                         @click="SetUserAuthentication()"

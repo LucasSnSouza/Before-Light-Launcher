@@ -66,6 +66,7 @@
             title="Confirmation"
             :buttons="modal_sucess_buttons_form"
             @onCancel="modal_sucess_status = false"
+            @onContinue="$router.push( { path: '/worlds' } )"
         >
             <p class="o-half">The user was found successfully, do you want to continue to the game?</p>
         </ModalBasic>
